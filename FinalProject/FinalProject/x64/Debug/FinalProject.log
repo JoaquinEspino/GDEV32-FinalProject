@@ -1,0 +1,17 @@
+﻿  glad.c
+  Main.cpp
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(148,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(148,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(523,32): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(523,19): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(580,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(601,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(783,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(806,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(807,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(811,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(812,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(813,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(814,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Computer Graphics Materials\glfw-3.3.2\include\glm\detail\type_quat.inl(837,17): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  FinalProject.vcxproj -> D:\Computer Graphics Materials\glfw-3.3.2\Projects\GDEV32-FinalProject\FinalProject\x64\Debug\FinalProject.exe
