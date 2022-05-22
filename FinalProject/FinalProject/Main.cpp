@@ -673,9 +673,9 @@ int main()
 
 		GLint modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
 		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(roomModelMatrix));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glDrawArrays(GL_TRIANGLES, 36, 6);
-		glDrawArrays(GL_TRIANGLES, 150, 6);
+		glDrawArrays(GL_TRIANGLES, 0, 30);
+		//glDrawArrays(GL_TRIANGLES, 36, 6);
+		//glDrawArrays(GL_TRIANGLES, 150, 6);
 
 		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
 		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(Crate1ModelMatrix));
@@ -693,9 +693,9 @@ int main()
 		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(WindowModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 156, 6);
 
-		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		/*modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
 		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(RoofModelMatrix));
-		glDrawArrays(GL_TRIANGLES, 162, 18);
+		glDrawArrays(GL_TRIANGLES, 162, 18);*/
 
 		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
 		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(ChairBackModelMatrix));
@@ -757,7 +757,7 @@ int main()
 		glUniform3f(lightSpecularUniformLocation, 0.2f, 0.2f, 0.2f);
 
 		GLint directionalLightUniformLocation = glGetUniformLocation(program, "directional_light");
-		glUniform3f(directionalLightUniformLocation, 0.0f, -1.0f, -1.0f);
+		glUniform3f(directionalLightUniformLocation, 0.0f, -1.0f, 1.0f);
 
 		GLint shininessUniformLocation = glGetUniformLocation(program, "u_shininess");
 		glUniform1f(shininessUniformLocation, 1.0f);
@@ -768,9 +768,9 @@ int main()
 		GLint modelUniformLocation = glGetUniformLocation(program, "model");
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(roomModelMatrix));
 
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glDrawArrays(GL_TRIANGLES, 36, 6);
-		glDrawArrays(GL_TRIANGLES, 150, 6);
+		glDrawArrays(GL_TRIANGLES, 0, 30);
+		//glDrawArrays(GL_TRIANGLES, 36, 6);
+		//glDrawArrays(GL_TRIANGLES, 150, 6);
 
 		
 		finalMatrix = projectionMatrix * viewMatrix * Crate1ModelMatrix;
@@ -843,10 +843,10 @@ int main()
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
 
-		glUniformMatrix4fv(matUniformLocation, 1, GL_FALSE, glm::value_ptr(finalMatrix));
+		/*glUniformMatrix4fv(matUniformLocation, 1, GL_FALSE, glm::value_ptr(finalMatrix));
 		modelUniformLocation = glGetUniformLocation(program, "model");
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(RoofModelMatrix));
-		glDrawArrays(GL_TRIANGLES, 162, 18);
+		glDrawArrays(GL_TRIANGLES, 162, 18);*/
 
 		
 		finalMatrix = projectionMatrix * viewMatrix * ChairBackModelMatrix;
