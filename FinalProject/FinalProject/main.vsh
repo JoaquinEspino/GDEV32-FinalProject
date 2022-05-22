@@ -18,10 +18,11 @@ out vec2 outUV;
 // Color (will be passed to the fragment shader)
 out vec3 outColor;
 
-uniform mat4 mat, model;
+uniform mat4 mat, model, viewLight, projectionLight;;
 
 out vec3 fragPosition;
 out vec3 fragNormal;
+out vec4 lightFragmentPosition;
 
 void main()
 {
@@ -34,6 +35,8 @@ void main()
 
 	// Give OpenGL the final position of our vertex
 	gl_Position = finalPosition;
+
+	lightFragmentPosition = projectionLight * viewLight * model * vec4(vertexPosition, 1.0);
 
 	outUV = vertexUV;
 	outColor = vertexColor;

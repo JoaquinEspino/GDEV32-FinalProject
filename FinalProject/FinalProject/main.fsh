@@ -31,6 +31,11 @@ uniform vec3 point_specular_intensity;
 uniform float u_shininess;
 
 uniform vec3 eyePosition;
+
+in vec4 lightFragmentPosition;
+
+uniform sampler2D shadowMap;
+
 void main()
 {
 	// Get pixel color of the texture at the current UV coordinate
@@ -55,9 +60,22 @@ void main()
 
 	vec3 texColor3 = vec3(texColor);
 
-	vec3 sum = (ambient + dirDiffuse + specularDir) * texColor3;
+	vec3 fragLightNDC = lightFragmentPosition.xyz / lightFragmentPosition.w;
+	fragLightNDC = (fragLightNDC + 1)/2;
 
-	fragColor = vec4(sum, 1.0f);
+	float bias = max(0.5 * (1.0-dot(fragNormal, directional_light_dir)), 0.0);
+	bias = 0.05f;
+
+	if(texture(shadowMap, fragLightNDC.xy).r < (fragLightNDC.z-bias))
+	{
+		vec3 sum = (ambient) * texColor3;
+		fragColor = vec4(sum, 1.0f);
+	}
+	else
+	{
+		vec3 sum = (ambient + dirDiffuse + specularDir) * texColor3;
+		fragColor = vec4(sum, 1.0f);
+	}
 
 	//fragColor = texture(tex, outUV);
 }

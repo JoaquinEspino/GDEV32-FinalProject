@@ -551,12 +551,15 @@ int main()
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 2048, 2048, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, nullptr);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, framebufferTex, 0);
 	glDrawBuffer(GL_NONE);
-
+	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
@@ -586,23 +589,179 @@ int main()
 		glBindVertexArray(vao);
 
 		// Bind our texture to texture unit 0
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, tex);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, framebufferTex);
 
 		// Make our sampler in the fragment shader use texture unit 0
 		GLint texUniformLocation = glGetUniformLocation(program, "tex");
 		glUniform1i(texUniformLocation, 0);
 
 		float time = glfwGetTime();
-
-		glm::mat4 projectionMatrixLight = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, -10.0f, 20.0f);
-		glm::mat4 viewMatrixLight = glm::lookAt(glm::vec3(0.0f, 10.0f, -10.0f), glm::vec3(0.0f, 0.0f, 0.0f), cameraUp);
-
+		// model matrices
 		glm::mat4 roomModelMatrix = glm::mat4(1.0f);
 		roomModelMatrix = glm::scale(roomModelMatrix, glm::vec3(5.0f, 5.0f, 5.0f));
+
+		glm::mat4 Crate1ModelMatrix = glm::mat4(1.0f);
+		Crate1ModelMatrix = glm::translate(Crate1ModelMatrix, glm::vec3(-4.0f, -4.0f, -4.0f));
+
+		glm::mat4 projectionMatrixLight = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 10.0f, 20.0f);
+		glm::mat4 viewMatrixLight = glm::lookAt(glm::vec3(0.0f, 10.0f, -10.0f), glm::vec3(0.0f, 0.0f, 0.0f), cameraUp);
+
+		glm::mat4 Crate2ModelMatrix = glm::mat4(1.0f);
+		Crate2ModelMatrix = glm::translate(Crate2ModelMatrix, glm::vec3(-4.5f, -2.6f, -3.5f));
+		Crate2ModelMatrix = glm::scale(Crate2ModelMatrix, glm::vec3(0.3f, 0.3f, 0.3f));
+		Crate2ModelMatrix = glm::rotate(Crate2ModelMatrix, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::mat4 Crate3ModelMatrix = glm::mat4(1.0f);
+		Crate3ModelMatrix = glm::translate(Crate3ModelMatrix, glm::vec3(-3.5f, -2.6f, -4.0f));
+		Crate3ModelMatrix = glm::scale(Crate3ModelMatrix, glm::vec3(0.3f, 0.3f, 0.3f));
+		Crate3ModelMatrix = glm::rotate(Crate3ModelMatrix, glm::radians(250.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::mat4 WindowModelMatrix = glm::mat4(1.0f);
+		WindowModelMatrix = glm::translate(WindowModelMatrix, glm::vec3(0.0f, 3.0f, 0.0f));
+		WindowModelMatrix = glm::scale(WindowModelMatrix, glm::vec3(5.0f, 5.0f, 5.0f));
+		WindowModelMatrix = glm::rotate(WindowModelMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::mat4 RoofModelMatrix = glm::mat4(1.0f);
+		RoofModelMatrix = glm::translate(RoofModelMatrix, glm::vec3(0.0f, 5.01f, 0.0f));
+		RoofModelMatrix = glm::scale(RoofModelMatrix, glm::vec3(6.0f, 6.0f, 6.0f));
+
+		glm::mat4 ChairBackModelMatrix = glm::mat4(1.0f);
+		ChairBackModelMatrix = glm::translate(ChairBackModelMatrix, glm::vec3(3.75f, -1.0f, -4.8f));
+		ChairBackModelMatrix = glm::scale(ChairBackModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
+		ChairBackModelMatrix = glm::rotate(ChairBackModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::mat4 ChairBaseModelMatrix = glm::mat4(1.0f);
+		ChairBaseModelMatrix = glm::translate(ChairBaseModelMatrix, glm::vec3(3.0f, -1.6f, -3.2f));
+		ChairBaseModelMatrix = glm::scale(ChairBaseModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
+		ChairBaseModelMatrix = glm::rotate(ChairBaseModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		ChairBaseModelMatrix = glm::rotate(ChairBaseModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+		glm::mat4 ChairLeg1ModelMatrix = glm::mat4(1.0f);
+		ChairLeg1ModelMatrix = glm::translate(ChairLeg1ModelMatrix, glm::vec3(2.98f, -3.7f, -3.22f));
+		ChairLeg1ModelMatrix = glm::scale(ChairLeg1ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
+		ChairLeg1ModelMatrix = glm::rotate(ChairLeg1ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::mat4 ChairLeg2ModelMatrix = glm::mat4(1.0f);
+		ChairLeg2ModelMatrix = glm::translate(ChairLeg2ModelMatrix, glm::vec3(1.68f, -3.7f, -3.83f));
+		ChairLeg2ModelMatrix = glm::scale(ChairLeg2ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
+		ChairLeg2ModelMatrix = glm::rotate(ChairLeg2ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::mat4 ChairLeg3ModelMatrix = glm::mat4(1.0f);
+		ChairLeg3ModelMatrix = glm::translate(ChairLeg3ModelMatrix, glm::vec3(2.5f, -3.7f, -5.6f));
+		ChairLeg3ModelMatrix = glm::scale(ChairLeg3ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
+		ChairLeg3ModelMatrix = glm::rotate(ChairLeg3ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::mat4 ChairLeg4ModelMatrix = glm::mat4(1.0f);
+		ChairLeg4ModelMatrix = glm::translate(ChairLeg4ModelMatrix, glm::vec3(3.8f, -3.7f, -5.0f));
+		ChairLeg4ModelMatrix = glm::scale(ChairLeg4ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
+		ChairLeg4ModelMatrix = glm::rotate(ChairLeg4ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		//first pass
+		
+		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glViewport(0, 0, 2048, 2048);
+		glUseProgram(program_mapping);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, tex);
+
+		GLint projectionlUniformLocationMapping = glGetUniformLocation(program_mapping, "projection");
+		glUniformMatrix4fv(projectionlUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(projectionMatrixLight));
+		GLint viewUniformLocationMapping = glGetUniformLocation(program_mapping, "view");
+		glUniformMatrix4fv(viewUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(viewMatrixLight));
+
+		GLint modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(roomModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 36, 6);
+		glDrawArrays(GL_TRIANGLES, 150, 6);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(Crate1ModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 42, 36);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(Crate2ModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 42, 36);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(Crate3ModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 42, 36);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(WindowModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 156, 6);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(RoofModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 162, 18);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(ChairBackModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 180, 36);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(ChairBaseModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 180, 36);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(ChairLeg1ModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 216, 24);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(ChairLeg2ModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 216, 24);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(ChairLeg3ModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 216, 24);
+
+		modelUniformLocationMapping = glGetUniformLocation(program_mapping, "model");
+		glUniformMatrix4fv(modelUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(ChairLeg4ModelMatrix));
+		glDrawArrays(GL_TRIANGLES, 216, 24);
+
+		//second pass
+		glUseProgram(program);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, windowWidth, windowHeight);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, tex);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, framebufferTex);
+
 		glm::mat4 viewMatrix = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		glm::mat4 projectionMatrix = glm::perspective(glm::radians(fov), windowWidth / windowHeight, 0.1f, 100.0f);
 		glm::mat4 finalMatrix = projectionMatrix * viewMatrix * roomModelMatrix;
+
+		GLint projectionlUniformLocationMappingSecond = glGetUniformLocation(program, "projectionLight");
+		glUniformMatrix4fv(projectionlUniformLocationMappingSecond, 1, GL_FALSE, glm::value_ptr(projectionMatrixLight));
+		GLint viewUniformLocationMappingSecond = glGetUniformLocation(program, "viewLight");
+		glUniformMatrix4fv(viewUniformLocationMappingSecond, 1, GL_FALSE, glm::value_ptr(viewMatrixLight));
+		
+		GLint fboUniformLocation = glGetUniformLocation(program, "shadowMap");
+		glUniform1i(fboUniformLocation, 1);
+
+		GLint eyePositionUniformLocation = glGetUniformLocation(program, "eyePosition");
+		glUniform3f(eyePositionUniformLocation, cameraPos.x, cameraPos.y, cameraPos.z);
+
+		GLint lightAmbientUniformLocation = glGetUniformLocation(program, "point_ambient_intensity");
+		glUniform3f(lightAmbientUniformLocation, 0.4f, 0.4f, 0.4f);
+
+		GLint lightDiffuseUniformLocation = glGetUniformLocation(program, "point_diffuse_intensity");
+		glUniform3f(lightDiffuseUniformLocation, 0.8f, 0.8f, 0.8f);
+
+		GLint lightSpecularUniformLocation = glGetUniformLocation(program, "point_specular_intensity");
+		glUniform3f(lightSpecularUniformLocation, 0.2f, 0.2f, 0.2f);
+
+		GLint directionalLightUniformLocation = glGetUniformLocation(program, "directional_light");
+		glUniform3f(directionalLightUniformLocation, 0.0f, -1.0f, -1.0f);
+
+		GLint shininessUniformLocation = glGetUniformLocation(program, "u_shininess");
+		glUniform1f(shininessUniformLocation, 1.0f);
+
 
 		GLint matUniformLocation = glGetUniformLocation(program, "mat");
 		glUniformMatrix4fv(matUniformLocation, 1, GL_FALSE, glm::value_ptr(finalMatrix));
@@ -613,8 +772,7 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 36, 6);
 		glDrawArrays(GL_TRIANGLES, 150, 6);
 
-		glm::mat4 Crate1ModelMatrix = glm::mat4(1.0f);
-		Crate1ModelMatrix = glm::translate(Crate1ModelMatrix, glm::vec3(-4.0f, -4.0f, -4.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * Crate1ModelMatrix;
 		
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -623,10 +781,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(Crate1ModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 42, 36);
 
-		glm::mat4 Crate2ModelMatrix = glm::mat4(1.0f);
-		Crate2ModelMatrix = glm::translate(Crate2ModelMatrix, glm::vec3(-4.5f, -2.6f, -3.5f));
-		Crate2ModelMatrix = glm::scale(Crate2ModelMatrix, glm::vec3(0.3f, 0.3f, 0.3f));
-		Crate2ModelMatrix = glm::rotate(Crate2ModelMatrix, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * Crate2ModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -635,10 +790,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(Crate2ModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 42, 36);
 
-		glm::mat4 Crate3ModelMatrix = glm::mat4(1.0f);
-		Crate3ModelMatrix = glm::translate(Crate3ModelMatrix, glm::vec3(-3.5f, -2.6f, -4.0f));
-		Crate3ModelMatrix = glm::scale(Crate3ModelMatrix, glm::vec3(0.3f, 0.3f, 0.3f));
-		Crate3ModelMatrix = glm::rotate(Crate3ModelMatrix, glm::radians(250.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * Crate3ModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -647,10 +799,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(Crate3ModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 42, 36);
 
-		glm::mat4 WindowModelMatrix = glm::mat4(1.0f);
-		WindowModelMatrix = glm::translate(WindowModelMatrix, glm::vec3(0.0f, 3.0f, 0.0f));
-		WindowModelMatrix = glm::scale(WindowModelMatrix, glm::vec3(5.0f, 5.0f, 5.0f));
-		WindowModelMatrix = glm::rotate(WindowModelMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * WindowModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -689,9 +838,7 @@ int main()
 		glUniformMatrix4fv(matUniformLocation, 1, GL_FALSE, glm::value_ptr(finalMatrix));
 		glDrawArrays(GL_TRIANGLES, 156, 6);*/
 
-		glm::mat4 RoofModelMatrix = glm::mat4(1.0f);
-		RoofModelMatrix = glm::translate(RoofModelMatrix, glm::vec3(0.0f, 5.01f, 0.0f));
-		RoofModelMatrix = glm::scale(RoofModelMatrix, glm::vec3(6.0f, 6.0f, 6.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * RoofModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -701,10 +848,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(RoofModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 162, 18);
 
-		glm::mat4 ChairBackModelMatrix = glm::mat4(1.0f);
-		ChairBackModelMatrix = glm::translate(ChairBackModelMatrix, glm::vec3(3.75f, -1.0f, -4.8f));
-		ChairBackModelMatrix = glm::scale(ChairBackModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
-		ChairBackModelMatrix = glm::rotate(ChairBackModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * ChairBackModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -713,11 +857,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(ChairBackModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 180, 36);
 
-		glm::mat4 ChairBaseModelMatrix = glm::mat4(1.0f);
-		ChairBaseModelMatrix = glm::translate(ChairBaseModelMatrix, glm::vec3(3.0f, -1.6f, -3.2f));
-		ChairBaseModelMatrix = glm::scale(ChairBaseModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
-		ChairBaseModelMatrix = glm::rotate(ChairBaseModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		ChairBaseModelMatrix = glm::rotate(ChairBaseModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * ChairBaseModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -726,10 +866,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(ChairBaseModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 180, 36);
 
-		glm::mat4 ChairLeg1ModelMatrix = glm::mat4(1.0f);
-		ChairLeg1ModelMatrix = glm::translate(ChairLeg1ModelMatrix, glm::vec3(2.98f, -3.7f, -3.22f));
-		ChairLeg1ModelMatrix = glm::scale(ChairLeg1ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
-		ChairLeg1ModelMatrix = glm::rotate(ChairLeg1ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * ChairLeg1ModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -738,10 +875,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(ChairLeg1ModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 216, 24);
 
-		glm::mat4 ChairLeg2ModelMatrix = glm::mat4(1.0f);
-		ChairLeg2ModelMatrix = glm::translate(ChairLeg2ModelMatrix, glm::vec3(1.68f, -3.7f, -3.83f));
-		ChairLeg2ModelMatrix = glm::scale(ChairLeg2ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
-		ChairLeg2ModelMatrix = glm::rotate(ChairLeg2ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * ChairLeg2ModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -750,10 +884,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(ChairLeg2ModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 216, 24);
 
-		glm::mat4 ChairLeg3ModelMatrix = glm::mat4(1.0f);
-		ChairLeg3ModelMatrix = glm::translate(ChairLeg3ModelMatrix, glm::vec3(2.5f, -3.7f, -5.6f));
-		ChairLeg3ModelMatrix = glm::scale(ChairLeg3ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
-		ChairLeg3ModelMatrix = glm::rotate(ChairLeg3ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * ChairLeg3ModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -762,10 +893,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(ChairLeg3ModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 216, 24);
 
-		glm::mat4 ChairLeg4ModelMatrix = glm::mat4(1.0f);
-		ChairLeg4ModelMatrix = glm::translate(ChairLeg4ModelMatrix, glm::vec3(3.8f, -3.7f, -5.0f));
-		ChairLeg4ModelMatrix = glm::scale(ChairLeg4ModelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
-		ChairLeg4ModelMatrix = glm::rotate(ChairLeg4ModelMatrix, glm::radians(-25.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		finalMatrix = projectionMatrix * viewMatrix * ChairLeg4ModelMatrix;
 
 		matUniformLocation = glGetUniformLocation(program, "mat");
@@ -774,23 +902,7 @@ int main()
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(ChairLeg4ModelMatrix));
 		glDrawArrays(GL_TRIANGLES, 216, 24);
 
-		GLint eyePositionUniformLocation = glGetUniformLocation(program, "eyePosition");
-		glUniform3f(eyePositionUniformLocation, cameraPos.x, cameraPos.y, cameraPos.z);
-
-		GLint lightAmbientUniformLocation = glGetUniformLocation(program, "point_ambient_intensity");
-		glUniform3f(lightAmbientUniformLocation, 0.4f, 0.4f, 0.4f);
-
-		GLint lightDiffuseUniformLocation = glGetUniformLocation(program, "point_diffuse_intensity");
-		glUniform3f(lightDiffuseUniformLocation, 0.8f, 0.8f, 0.8f);
-
-		GLint lightSpecularUniformLocation = glGetUniformLocation(program, "point_specular_intensity");
-		glUniform3f(lightSpecularUniformLocation, 0.2f, 0.2f, 0.2f);
-
-		GLint directionalLightUniformLocation = glGetUniformLocation(program, "directional_light");
-		glUniform3f(directionalLightUniformLocation, 0.0f, -1.0f, -1.0f);
-
-		GLint shininessUniformLocation = glGetUniformLocation(program, "u_shininess");
-		glUniform1f(shininessUniformLocation, 1.0f);
+		
 
 		// "Unuse" the vertex array object
 		glBindVertexArray(0);
