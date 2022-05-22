@@ -718,6 +718,24 @@ int main()
 		glUniformMatrix4fv(matUniformLocation, 1, GL_FALSE, glm::value_ptr(finalMatrix));
 		glDrawArrays(GL_TRIANGLES, 216, 24);
 
+		GLint eyePositionUniformLocation = glGetUniformLocation(program, "eyePosition");
+		glUniform3f(eyePositionUniformLocation, cameraPos.x, cameraPos.y, cameraPos.z);
+
+		GLint lightAmbientUniformLocation = glGetUniformLocation(program, "point_ambient_intensity");
+		glUniform3f(lightAmbientUniformLocation, 0.4f, 0.4f, 0.4f);
+
+		GLint lightDiffuseUniformLocation = glGetUniformLocation(program, "point_diffuse_intensity");
+		glUniform3f(lightDiffuseUniformLocation, 0.8f, 0.8f, 0.8f);
+
+		GLint lightSpecularUniformLocation = glGetUniformLocation(program, "point_specular_intensity");
+		glUniform3f(lightSpecularUniformLocation, 0.2f, 0.2f, 0.2f);
+
+		GLint directionalLightUniformLocation = glGetUniformLocation(program, "directional_light");
+		glUniform3f(directionalLightUniformLocation, 0.0f, -1.0f, 1.0f);
+
+		GLint shininessUniformLocation = glGetUniformLocation(program, "u_shininess");
+		glUniform1f(shininessUniformLocation, 1.0f);
+
 		// "Unuse" the vertex array object
 		glBindVertexArray(0);
 
