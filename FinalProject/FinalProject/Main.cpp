@@ -169,20 +169,20 @@ int main()
 	vertices[23] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.5f, 0.5f,		0.0f, 1.0f, 0.0f };
 
 	// Front Wall
-	vertices[24] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, 1.0f };
-	vertices[25] = { 1.0f, 1.0f, 1.0f,		255, 255, 255,		0.0f, 1.0f,		0.0f, 0.0f, 1.0f };
-	vertices[26] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, 1.0f };
-	vertices[27] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, 1.0f };
-	vertices[28] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, 1.0f };
-	vertices[29] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.5f, 0.5f,		0.0f, 0.0f, 1.0f };
+	vertices[24] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, -1.0f };
+	vertices[25] = { 1.0f, 1.0f, 1.0f,		255, 255, 255,		0.0f, 1.0f,		0.0f, 0.0f, -1.0f };
+	vertices[26] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, -1.0f };
+	vertices[27] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, -1.0f };
+	vertices[28] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, -1.0f };
+	vertices[29] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.5f, 0.5f,		0.0f, 0.0f, -1.0f };
 
 	// Back Wall
-	vertices[30] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, -1.0f };
-	vertices[31] = { 1.0f, 1.0f, -1.0f,		255, 255, 255,		0.0f, 1.0f,		0.0f, 0.0f, -1.0f };
-	vertices[32] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, -1.0f };
-	vertices[33] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, -1.0f };
-	vertices[34] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, -1.0f };
-	vertices[35] = { -1.0f, -1.0f, -1.0f,	255, 255, 255,		0.5f, 0.5f,		0.0f, 0.0f, -1.0f };
+	vertices[30] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, 1.0f };
+	vertices[31] = { 1.0f, 1.0f, -1.0f,		255, 255, 255,		0.0f, 1.0f,		0.0f, 0.0f, 1.0f };
+	vertices[32] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, 1.0f };
+	vertices[33] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.0f, 0.5f,		0.0f, 0.0f, 1.0f };
+	vertices[34] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.5f, 1.0f,		0.0f, 0.0f, 1.0f };
+	vertices[35] = { -1.0f, -1.0f, -1.0f,	255, 255, 255,		0.5f, 0.5f,		0.0f, 0.0f, 1.0f };
 
 	//Door
 	vertices[36] = { 0.25f, -1.0f, 1.01f,	255, 255, 255,		0.25f, 0.0f,	0.0f, 0.0f, 1.0f };
@@ -225,20 +225,20 @@ int main()
 	vertices[65] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, -1.0f, 0.0f };
 
 	// Front Wall Big Crate
-	vertices[66] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[67] = { 1.0f, 1.0f, 1.0f,		255, 255, 255,		0.6f, 0.5f,		0.0f, 0.0f, -1.0f };
-	vertices[68] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, -1.0f };
-	vertices[69] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[70] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, -1.0f };
-	vertices[71] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, -1.0f };
+	vertices[66] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[67] = { 1.0f, 1.0f, 1.0f,		255, 255, 255,		0.6f, 0.5f,		0.0f, 0.0f, 1.0f };
+	vertices[68] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, 1.0f };
+	vertices[69] = { 1.0f, -1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[70] = { -1.0f, 1.0f, 1.0f,		255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, 1.0f };
+	vertices[71] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, 1.0f };
 
 	// Back Wall Big Crate
-	vertices[72] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, 1.0f };
-	vertices[73] = { 1.0f, 1.0f, -1.0f,		255, 255, 255,		0.6f, 0.5f,		0.0f, 0.0f, 1.0f };
-	vertices[74] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, 1.0f };
-	vertices[75] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, 1.0f };
-	vertices[76] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, 1.0f };
-	vertices[77] = { -1.0f, -1.0f, -1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[72] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
+	vertices[73] = { 1.0f, 1.0f, -1.0f,		255, 255, 255,		0.6f, 0.5f,		0.0f, 0.0f, -1.0f };
+	vertices[74] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, -1.0f };
+	vertices[75] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
+	vertices[76] = { -1.0f, 1.0f, -1.0f,	255, 255, 255,		0.25f, 0.5f,	0.0f, 0.0f, -1.0f };
+	vertices[77] = { -1.0f, -1.0f, -1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, -1.0f };
 
 	// Right Wall Big Crate 2
 	vertices[78] = { 1.0f, -1.0f, -1.0f,	255, 255, 255,		0.6f, 0.15f,	1.0f, 0.0f, 0.0f };
@@ -378,19 +378,19 @@ int main()
 	vertices[179] = { -1.0f, 0.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f };
 
 	// Chair back
-	vertices[180] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, -1.0f };
-	vertices[181] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[182] = { -1.0f, 1.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[183] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, -1.0f };
-	vertices[184] = { -1.0f, 1.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[185] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.25f, 0.0f,	0.0f, 0.0f, -1.0f };
+	vertices[180] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, 1.0f };
+	vertices[181] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[182] = { -1.0f, 1.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[183] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, 1.0f };
+	vertices[184] = { -1.0f, 1.0f, 1.0f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[185] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.25f, 0.0f,	0.0f, 0.0f, 1.0f };
 
-	vertices[186] = { 0.5f, -1.0f, 0.5f,	255, 255, 255,		0.6f, 0.0f,		-1.0f, 0.0f, 0.0f };
-	vertices[187] = { 0.5f, 1.0f, 0.5f,		255, 255, 255,		0.6f, 0.15f,	-1.0f, 0.0f, 0.0f };
-	vertices[188] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.4f, 0.15f,	-1.0f, 0.0f, 0.0f };
-	vertices[189] = { 0.5f, -1.0f, 0.5f,	255, 255, 255,		0.6f, 0.0f,		-1.0f, 0.0f, 0.0f };
-	vertices[190] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.4f, 0.15f,	-1.0f, 0.0f, 0.0f };
-	vertices[191] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.4f, 0.0f,		-1.0f, 0.0f, 0.0f };
+	vertices[186] = { 0.5f, -1.0f, 0.5f,	255, 255, 255,		0.6f, 0.0f,		1.0f, 0.0f, 0.0f };
+	vertices[187] = { 0.5f, 1.0f, 0.5f,		255, 255, 255,		0.6f, 0.15f,	1.0f, 0.0f, 0.0f };
+	vertices[188] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.4f, 0.15f,	1.0f, 0.0f, 0.0f };
+	vertices[189] = { 0.5f, -1.0f, 0.5f,	255, 255, 255,		0.6f, 0.0f,		1.0f, 0.0f, 0.0f };
+	vertices[190] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.4f, 0.15f,	1.0f, 0.0f, 0.0f };
+	vertices[191] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.4f, 0.0f,		1.0f, 0.0f, 0.0f };
 
 	vertices[192] = { 0.5f, -1.0f, 0.5f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, -1.0f };
 	vertices[193] = { 0.5f, 1.0f, 0.5f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
@@ -399,12 +399,12 @@ int main()
 	vertices[196] = { -1.0f, 1.0f, 0.5f,	255, 255, 255,		0.25f, 0.15f,	0.0f, 0.0f, -1.0f };
 	vertices[197] = { -1.0f, -1.0f, 0.5f,	255, 255, 255,		0.25f, 0.0f,	0.0f, 0.0f, -1.0f };
 
-	vertices[198] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		1.0f, 0.0f, 0.0f };
-	vertices[199] = { -1.0f, 1.0f, 1.0f,	255, 255, 255,		0.6f, 0.15f,	1.0f, 0.0f, 0.0f };
-	vertices[200] = { -1.0f, 1.0f, 0.5f,	255, 255, 255,		0.4f, 0.15f,	1.0f, 0.0f, 0.0f };
-	vertices[201] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		1.0f, 0.0f, 0.0f };
-	vertices[202] = { -1.0f, 1.0f, 0.5f,	255, 255, 255,		0.4f, 0.15f,	1.0f, 0.0f, 0.0f };
-	vertices[203] = { -1.0f, -1.0f, 0.5f,	255, 255, 255,		0.4f, 0.0f,		1.0f, 0.0f, 0.0f };
+	vertices[198] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		-1.0f, 0.0f, 0.0f };
+	vertices[199] = { -1.0f, 1.0f, 1.0f,	255, 255, 255,		0.6f, 0.15f,	-1.0f, 0.0f, 0.0f };
+	vertices[200] = { -1.0f, 1.0f, 0.5f,	255, 255, 255,		0.4f, 0.15f,	-1.0f, 0.0f, 0.0f };
+	vertices[201] = { -1.0f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		-1.0f, 0.0f, 0.0f };
+	vertices[202] = { -1.0f, 1.0f, 0.5f,	255, 255, 255,		0.4f, 0.15f,	-1.0f, 0.0f, 0.0f };
+	vertices[203] = { -1.0f, -1.0f, 0.5f,	255, 255, 255,		0.4f, 0.0f,		-1.0f, 0.0f, 0.0f };
 	
 	vertices[204] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.6f, 0.0f,		0.0f, 1.0f, 0.0f };
 	vertices[205] = { 0.5f, 1.0f, 0.5f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 1.0f, 0.0f };
@@ -428,12 +428,12 @@ int main()
 	vertices[220] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.4f, 0.15f,	1.0f, 0.0f, 0.0f };
 	vertices[221] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.4f, 0.0f,		1.0f, 0.0f, 0.0f };
 
-	vertices[222] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, -1.0f };
-	vertices[223] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[224] = { 0.25f, 1.0f, 1.0f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[225] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, -1.0f };
-	vertices[226] = { 0.25f, 1.0f, 1.0f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, -1.0f };
-	vertices[227] = { 0.25f, -1.0f, 1.0f,	255, 255, 255,		0.4f, 0.0f,		0.0f, 0.0f, -1.0f };
+	vertices[222] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, 1.0f };
+	vertices[223] = { 0.5f, 1.0f, 1.0f,		255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[224] = { 0.25f, 1.0f, 1.0f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[225] = { 0.5f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, 1.0f };
+	vertices[226] = { 0.25f, 1.0f, 1.0f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, 1.0f };
+	vertices[227] = { 0.25f, -1.0f, 1.0f,	255, 255, 255,		0.4f, 0.0f,		0.0f, 0.0f, 1.0f };
 
 	vertices[228] = { 0.25f, -1.0f, 1.0f,	255, 255, 255,		0.6f, 0.0f,		-1.0f, 0.0f, 0.0f };
 	vertices[229] = { 0.25f, 1.0f, 1.0f,	255, 255, 255,		0.6f, 0.15f,	-1.0f, 0.0f, 0.0f };
@@ -442,12 +442,12 @@ int main()
 	vertices[232] = { 0.25f, 1.0f, 0.75f,	255, 255, 255,		0.4f, 0.15f,	-1.0f, 0.0f, 0.0f };
 	vertices[233] = { 0.25f, -1.0f, 0.75f,	255, 255, 255,		0.4f, 0.0f,		-1.0f, 0.0f, 0.0f };
 
-	vertices[234] = { 0.5f, -1.0f, 0.75f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, 1.0f };
-	vertices[235] = { 0.5f, 1.0f, 0.75f,	255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, 1.0f };
-	vertices[236] = { 0.25f, 1.0f, 0.75f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, 1.0f };
-	vertices[237] = { 0.5f, -1.0f, 0.75f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, 1.0f };
-	vertices[238] = { 0.25f, 1.0f, 0.75f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, 1.0f };
-	vertices[239] = { 0.25f, -1.0f, 0.75f,	255, 255, 255,		0.4f, 0.0f,		0.0f, 0.0f, 1.0f };
+	vertices[234] = { 0.5f, -1.0f, 0.75f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, -1.0f };
+	vertices[235] = { 0.5f, 1.0f, 0.75f,	255, 255, 255,		0.6f, 0.15f,	0.0f, 0.0f, -1.0f };
+	vertices[236] = { 0.25f, 1.0f, 0.75f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, -1.0f };
+	vertices[237] = { 0.5f, -1.0f, 0.75f,	255, 255, 255,		0.6f, 0.0f,		0.0f, 0.0f, -1.0f };
+	vertices[238] = { 0.25f, 1.0f, 0.75f,	255, 255, 255,		0.4f, 0.15f,	0.0f, 0.0f, -1.0f };
+	vertices[239] = { 0.25f, -1.0f, 0.75f,	255, 255, 255,		0.4f, 0.0f,		0.0f, 0.0f, -1.0f };
 
 	// Create a vertex buffer object (VBO), and upload our vertices data to the VBO
 	GLuint vbo;
@@ -538,6 +538,31 @@ int main()
 		std::cerr << "Failed to load image" << std::endl;
 	}
 
+	GLuint framebuffer;
+	glGenFramebuffers(1, &framebuffer);
+
+
+	GLuint framebufferTex;
+	glGenTextures(1, &framebufferTex);
+	glBindTexture(GL_TEXTURE_2D, framebufferTex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 2048, 2048, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, nullptr);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, framebufferTex, 0);
+	glDrawBuffer(GL_NONE);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		std::cout << "Error! Framebuffer not complete!" << std::endl;
+	}
+
+
+
+
 	glEnable(GL_DEPTH_TEST);
 
 	// Render loop
@@ -602,7 +627,7 @@ int main()
 		glUniformMatrix4fv(matUniformLocation, 1, GL_FALSE, glm::value_ptr(finalMatrix));
 		modelUniformLocation = glGetUniformLocation(program, "model");
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(Crate2ModelMatrix));
-		glDrawArrays(GL_TRIANGLES, 78, 36);
+		glDrawArrays(GL_TRIANGLES, 42, 36);
 
 		glm::mat4 Crate3ModelMatrix = glm::mat4(1.0f);
 		Crate3ModelMatrix = glm::translate(Crate3ModelMatrix, glm::vec3(-3.5f, -2.6f, -4.0f));
@@ -614,7 +639,7 @@ int main()
 		glUniformMatrix4fv(matUniformLocation, 1, GL_FALSE, glm::value_ptr(finalMatrix));
 		modelUniformLocation = glGetUniformLocation(program, "model");
 		glUniformMatrix4fv(modelUniformLocation, 1, GL_FALSE, glm::value_ptr(Crate3ModelMatrix));
-		glDrawArrays(GL_TRIANGLES, 114, 36);
+		glDrawArrays(GL_TRIANGLES, 42, 36);
 
 		glm::mat4 WindowModelMatrix = glm::mat4(1.0f);
 		WindowModelMatrix = glm::translate(WindowModelMatrix, glm::vec3(0.0f, 3.0f, 0.0f));
@@ -756,7 +781,7 @@ int main()
 		glUniform3f(lightSpecularUniformLocation, 0.2f, 0.2f, 0.2f);
 
 		GLint directionalLightUniformLocation = glGetUniformLocation(program, "directional_light");
-		glUniform3f(directionalLightUniformLocation, 0.0f, -1.0f, 1.0f);
+		glUniform3f(directionalLightUniformLocation, 0.0f, -1.0f, -1.0f);
 
 		GLint shininessUniformLocation = glGetUniformLocation(program, "u_shininess");
 		glUniform1f(shininessUniformLocation, 1.0f);
