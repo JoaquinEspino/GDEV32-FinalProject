@@ -485,6 +485,9 @@ int main()
 	// Create a shader program
 	GLuint program = CreateShaderProgram("main.vsh", "main.fsh");
 
+	// shader program for sadown mapping
+	GLuint program_mapping = CreateShaderProgram("map_shader.vsh", "map_shader.fsh");
+
 	// Tell OpenGL the dimensions of the region where stuff will be drawn.
 	// For now, tell OpenGL to use the whole screen
 	glViewport(0, 0, windowWidth, windowHeight);
@@ -591,6 +594,9 @@ int main()
 		glUniform1i(texUniformLocation, 0);
 
 		float time = glfwGetTime();
+
+		glm::mat4 projectionMatrixLight = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, -10.0f, 20.0f);
+		glm::mat4 viewMatrixLight = glm::lookAt(glm::vec3(0.0f, 10.0f, -10.0f), glm::vec3(0.0f, 0.0f, 0.0f), cameraUp);
 
 		glm::mat4 roomModelMatrix = glm::mat4(1.0f);
 		roomModelMatrix = glm::scale(roomModelMatrix, glm::vec3(5.0f, 5.0f, 5.0f));
