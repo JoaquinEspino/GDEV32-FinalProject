@@ -62,6 +62,7 @@ struct Vertex
 	GLfloat x, y, z;	// Position
 	GLubyte r, g, b;	// Color
 	GLfloat u, v;		// UV coordinates
+	GLfloat nx, ny, nz; // Normal Vectors
 	
 };
 
