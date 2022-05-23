@@ -524,6 +524,9 @@ int main()
 	// shader program for sadown mapping
 	GLuint program_mapping = CreateShaderProgram("map_shader.vsh", "map_shader.fsh");
 
+	GLuint skyboxShader = CreateShaderProgram("skybox.vsh", "skybox.fsh");
+
+	
 	// Tell OpenGL the dimensions of the region where stuff will be drawn.
 	// For now, tell OpenGL to use the whole screen
 	glViewport(0, 0, windowWidth, windowHeight);
@@ -597,12 +600,12 @@ int main()
 	// All the faces of the cubemap (make sure they are in this exact order)
 	std::string facesCubemap[6] =
 	{
-		"/Skybox/posx.jpg",
-		"/Skybox/negx.jpg",
-		"/Skybox/posy.jpg",
-		"/Skybox/negy.jpg",
-		"/Skybox/posz.jpg",
-		"/Skybox/negz.jpg"
+		"Skybox/posx.jpg",
+		"Skybox/negx.jpg",
+		"Skybox/posy.jpg",
+		"Skybox/negy.jpg",
+		"Skybox/posz.jpg",
+		"Skybox/negz.jpg"
 	};
 
 	// Creates the cubemap texture object
@@ -687,6 +690,9 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Use the shader program that we created
+		
+
+
 		glUseProgram(program);
 
 		// Use the vertex array object that we created
@@ -1007,6 +1013,36 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 216, 24);
 
 		
+		
+		
+		glDepthFunc(GL_LEQUAL);
+		glUseProgram(skyboxShader);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		GLint skyboxUniformLocationMapping = glGetUniformLocation(skyboxShader, "skybox");
+		glUniform1i(skyboxUniformLocationMapping, 2);
+
+		glm::mat4 viewsky = glm::mat4(1.0f);
+		glm::mat4 projectionsky = glm::mat4(1.0f);
+		// We make the mat4 into a mat3 and then a mat4 again in order to get rid of the last row and column
+		// The last row and column affect the translation of the skybox (which we don't want to affect)
+		viewsky = glm::mat4(glm::mat3(glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp)));
+		projectionsky = glm::perspective(glm::radians(fov), windowWidth / windowHeight, 0.1f, 100.0f);
+		GLint projectionSkyUniformLocationMapping = glGetUniformLocation(skyboxShader, "projection");
+		glUniformMatrix4fv(projectionSkyUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(projectionsky));
+		GLint viewSkyUniformLocationMapping = glGetUniformLocation(skyboxShader, "view");
+		glUniformMatrix4fv(viewSkyUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(viewsky));
+
+		// Draws the cubemap as the last object so we can save a bit of performance by discarding all fragments
+		// where an object is present (a depth of 1.0f will always fail against any object's depth value)
+		glBindVertexArray(skyboxVAO);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		// Switch back to the normal depth function
+		glDepthFunc(GL_LESS);
 
 		// "Unuse" the vertex array object
 		glBindVertexArray(0);
