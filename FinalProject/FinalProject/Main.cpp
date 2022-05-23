@@ -593,6 +593,17 @@ int main()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+	
+	// All the faces of the cubemap (make sure they are in this exact order)
+	std::string facesCubemap[6] =
+	{
+		"/Skybox/posx.jpg",
+		"/Skybox/negx.jpg",
+		"/Skybox/posy.jpg",
+		"/Skybox/negy.jpg",
+		"/Skybox/posz.jpg",
+		"/Skybox/negz.jpg"
+	};
 
 
 	GLuint framebuffer;
