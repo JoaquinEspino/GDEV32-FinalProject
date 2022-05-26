@@ -32,6 +32,8 @@ uniform float u_shininess;
 
 uniform vec3 eyePosition;
 
+uniform vec3 pointLightPosition;
+
 in vec4 lightFragmentPosition;
 
 uniform sampler2D shadowMap;
@@ -68,16 +70,46 @@ void main()
 
 	vec3 color = vec3(time, time, time);
 
+	//diffuse point light
+	vec3 lightDir = normalize(pointLightPosition - fragPosition);
+	float diff = max(dot(norm, lightDir), 0.0f);
+	vec3 diffuse = diff * point_diffuse_intensity;
+	vec4 diffuse4 = vec4(diffuse, 1.0f);
+
+	vec3 reflectDir = reflect(-lightDir, fragNormal);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0),u_shininess);
+	vec3 specular = spec * point_specular_intensity;
+	// point attenuation
+	float d = sqrt(pow(fragPosition.x-pointLightPosition.x, 2) + pow(fragPosition.y-pointLightPosition.y, 2) + pow(fragPosition.z-pointLightPosition.z, 2));
+	float Pattenuation = 1/(1.0f + (0.0014f * d) + (0.000007f * pow(d, 2)));
+	// spot attenuation 
+
 	if(texture(shadowMap, fragLightNDC.xy).r < (fragLightNDC.z-bias))
 	{
-		vec3 sum = (ambient) * texColor3;
-		fragColor = vec4(sum, 1.0f);
+		if(time==0.2f)//night time
+		{
+			vec3 sum = (ambient+ ((diffuse + specular)*Pattenuation)) * texColor3;
+			fragColor = vec4(sum, 1.0f);
+		}
+		else
+		{
+			vec3 sum = (ambient) * texColor3;
+			fragColor = vec4(sum, 1.0f);
+		}
+
 	}
 	else
 	{
-		
-		vec3 sum = (ambient + (dirDiffuse*color) + (specularDir*color)) * texColor3;
-		fragColor = vec4(sum, 1.0f);
+		if(time==0.2f)//night time
+		{
+			vec3 sum = (ambient + ((dirDiffuse*color) + (specularDir*color) + ((diffuse + specular)*Pattenuation))) * texColor3;
+			fragColor = vec4(sum, 1.0f);
+		}
+		else
+		{
+			vec3 sum = (ambient + ((dirDiffuse*color) + (specularDir*color))) * texColor3;
+			fragColor = vec4(sum, 1.0f);
+		}
 	}
 
 	//fragColor = texture(tex, outUV);

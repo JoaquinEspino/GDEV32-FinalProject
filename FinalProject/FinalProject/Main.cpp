@@ -118,7 +118,7 @@ unsigned int skyboxIndices[] =
 	6, 2, 3
 };
 
-float timeofDay = 7.0f;//5:00pm
+float timeofDay = 19.4f;//12:00am
 
 /// <summary>
 /// Main function.
@@ -898,6 +898,9 @@ int main()
 		
 		GLint fboUniformLocation = glGetUniformLocation(program, "shadowMap");
 		glUniform1i(fboUniformLocation, 1);
+
+		GLint pointLightPositionUniform = glGetUniformLocation(program, "pointLightPosition");
+		glUniform3f(pointLightPositionUniform, 1.0f, 1.0f, 1.0f);
 
 		GLint eyePositionUniformLocation = glGetUniformLocation(program, "eyePosition");
 		glUniform3f(eyePositionUniformLocation, cameraPos.x, cameraPos.y, cameraPos.z);
