@@ -118,6 +118,8 @@ unsigned int skyboxIndices[] =
 	6, 2, 3
 };
 
+float timeofDay = 7.0f;//5:00pm
+
 /// <summary>
 /// Main function.
 /// </summary>
@@ -708,6 +710,45 @@ int main()
 		glUniform1i(texUniformLocation, 0);
 
 		float time = glfwGetTime();
+		// daytime
+		//Daytime
+		if (timeofDay >= 8.00f && timeofDay < 17.00f)//if the time is in between 8:00am to 5:00pm, then render as usual
+		{
+			timeofDay = 1.0f;
+		}
+		//Dusk to night
+		else if (timeofDay >= 17.00f && timeofDay <= 20.00f)//if the time is in between 5:00pm to 8:00pm, then render darker depending on the time
+		{
+			timeofDay = 20.00f - timeofDay;
+			if (timeofDay <= 0.5f)//if time is 7:30pm get a constant darkness of 0.2 to prevent total darkness
+			{
+				timeofDay = 0.2f;
+			}
+			else
+			{
+				timeofDay = timeofDay / 3.00f;
+			}
+
+		}
+		//night
+		else if (timeofDay > 20.00f && timeofDay <= 24.00f || timeofDay <= 0.00f && timeofDay < 5.00f)
+		{
+			timeofDay = 0.2f;
+		}
+		//night to dawn
+		else if (timeofDay >= 5.00f && timeofDay < 8.00f)
+		{
+			timeofDay = 8.00f - timeofDay;
+			if (timeofDay <= 3.00f && timeofDay >= 2.50f)
+			{
+				timeofDay = 0.2f;
+			}
+			else
+			{
+				timeofDay = (3.00f - timeofDay) / 3.00f;
+			}
+
+		}
 		// model matrices
 		glm::mat4 roomModelMatrix = glm::mat4(1.0f);
 		roomModelMatrix = glm::scale(roomModelMatrix, glm::vec3(5.0f, 5.0f, 5.0f));
@@ -846,6 +887,9 @@ int main()
 		glm::mat4 viewMatrix = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		glm::mat4 projectionMatrix = glm::perspective(glm::radians(fov), windowWidth / windowHeight, 0.1f, 100.0f);
 		glm::mat4 finalMatrix = projectionMatrix * viewMatrix * roomModelMatrix;
+
+		GLint timelightUniformLocation = glGetUniformLocation(program, "time");
+		glUniform1f(timelightUniformLocation, timeofDay);
 
 		GLint projectionlUniformLocationMappingSecond = glGetUniformLocation(program, "projectionLight");
 		glUniformMatrix4fv(projectionlUniformLocationMappingSecond, 1, GL_FALSE, glm::value_ptr(projectionMatrixLight));
@@ -1033,7 +1077,11 @@ int main()
 		glUniformMatrix4fv(projectionSkyUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(projectionsky));
 		GLint viewSkyUniformLocationMapping = glGetUniformLocation(skyboxShader, "view");
 		glUniformMatrix4fv(viewSkyUniformLocationMapping, 1, GL_FALSE, glm::value_ptr(viewsky));
+		
+		
 
+		GLint timeSkyUniformLocation = glGetUniformLocation(skyboxShader, "time");
+		glUniform1f(timeSkyUniformLocation, timeofDay);
 		// Draws the cubemap as the last object so we can save a bit of performance by discarding all fragments
 		// where an object is present (a depth of 1.0f will always fail against any object's depth value)
 		glBindVertexArray(skyboxVAO);
